@@ -12,3 +12,13 @@ def get_data(my_date: datetime.date) -> str:
     my_day = str(my_date.day) if my_date.day > 9 else '0' + str(my_date.day)
     return my_year + '/' + my_month + '/' + my_day
 
+
+def get_usd() -> None:
+    my_date = datetime.date.today()
+    my_date -= datetime.timedelta(days=1)
+    
+    while my_date.year > 2022:
+        
+        with open(str(my_date) + '.csv', 'w', newline='', encoding="utf-8") as file:
+
+    
