@@ -12,6 +12,7 @@ def get_data(my_date: datetime.date) -> str:
     my_day = str(my_date.day) if my_date.day > 9 else '0' + str(my_date.day)
     return my_year + '/' + my_month + '/' + my_day
 
+
 def get_usd() -> None:
     my_date = datetime.date.today()
     my_date -= datetime.timedelta(days=1)
@@ -31,7 +32,8 @@ def get_usd() -> None:
                 for valute in valute_data.values():
                     if valute['CharCode'] == 'USD':
                         wrx.writerow((f"Дата: {data['Date']}").split(','))
-                        wry.writerow((f"{valute['Name']} курс: {valute['Value']}").split(','))
+                        wry.writerow(
+                            (f"{valute['Name']} курс: {valute['Value']}").split(','))
                 my_date -= datetime.timedelta(days=1)
 
 
