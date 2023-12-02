@@ -22,8 +22,7 @@ def get_usd() -> None:
         begining_data=datetime.datetime(int(current_date[0]), 1, 1)
         begining_data=str(begining_data)[:10]
         begining_dataf=begining_data[:4]+begining_data[5:7]+begining_data[8:10]
-        print(begining_dataf)
-        with open(begining_dataf + current_datef + '.csv', 'w', newline='', encoding="utf-8") as file:
+        with open(begining_dataf + "_" + current_datef + '.csv', 'w', newline='', encoding="utf-8") as file:
             url = "https://www.cbr-xml-daily.ru/archive/" + \
                     get_data(my_date) + "/daily_json.js"
             response = requests.get(url)
