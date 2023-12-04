@@ -13,45 +13,42 @@ def get_data(my_date: datetime.date) -> str:
     return my_year + '/' + my_month + '/' + my_day
 
 
+def get_cur_date(my_date: datetime.date) -> str:
+    current_date = str(my_date - datetime.timedelta(days=1)).split('-')
+    current_datef = current_date[0]+current_date[1]+current_date[2]
+    return str(current_datef)
+
+
 def get_usd() -> None:
     my_date = datetime.date.today()
+    current_datef = get_cur_date(my_date)
     my_date -= datetime.timedelta(days=1)
-    current_date = str(my_date).split('-')
-    current_datef=current_date[0]+current_date[1]+current_date[2]
-    # current_date=get_data(my_date)
     while my_date.year > 2021:
-        begining_data=datetime.datetime(int(current_date[0]), 1, 1)
-        begining_data=str(begining_data)[:10]
-        begining_dataf=begining_data[:4]+begining_data[5:7]+begining_data[8:10]
-        # begining_data=get_data()
-        print(begining_data)
-        print(my_date)
+        begining_data = datetime.datetime(int(current_datef[0:4]), 1, 1)
+        begining_data = str(begining_data)[:10]
+        begining_dataf = begining_data[:4] + \
+            begining_data[5:7]+begining_data[8:10]
         with open(begining_dataf + "_" + current_datef + '.csv', 'w', newline='', encoding="utf-8") as file:
             url = "https://www.cbr-xml-daily.ru/archive/" + \
-                    get_data(my_date) + "/daily_json.js"
+                get_data(my_date) + "/daily_json.js"
             response = requests.get(url)
             data = json.loads(response.text)
             if 'Valute' not in data:
-                my_date -= datetime.timedelta(days=1)
                 if str(my_date) == str(begining_data):
-                    print(my_date)
-                    print(begining_data)
-                    current_date = str(my_date - datetime.timedelta(days=1)).split('-')
-                    current_datef=current_date[0]+current_date[1]+current_date[2]
+                    current_datef = get_cur_date(my_date)
+                my_date -= datetime.timedelta(days=1)
                 continue
             valute_data = data['Valute']
-            wrx = csv.writer(file)
+            wr = csv.writer(file)
             for valute in valute_data.values():
                 if valute['CharCode'] == 'USD':
-                    wrx.writerow((f"Дата: {data['Date']}").split(','))
-                    wrx.writerow((f"{valute['Name']} курс: {valute['Value']}").split(','))
+                    wr.writerow((f"Дата: {data['Date']}").split(','))
+                    wr.writerow(
+                        (f"{valute['Name']} курс: {valute['Value']}").split(','))
             if str(my_date) == str(begining_data):
-                print(my_date)
-                print(begining_data)
-                current_date = str(my_date - datetime.timedelta(days=1)).split('-')
-                current_datef=current_date[0]+current_date[1]+current_date[2]
+                current_datef = get_cur_date(my_date)
             my_date -= datetime.timedelta(days=1)
-        
+
 
 def main() -> None:
     get_usd()
