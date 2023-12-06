@@ -31,7 +31,8 @@ def get_usd() -> None:
                 wry = csv.writer(yfile)
                 for valute in valute_data.values():
                     if valute['CharCode'] == 'USD':
-                        wrx.writerow((f"Дата: {data['Date'][0:10]}").split(','))
+                        wrx.writerow(
+                            (f"Дата: {data['Date'][0:10]}").split(','))
                         wry.writerow(
                             (f"{valute['Name']} курс: {valute['Value']}").split(','))
                 my_date -= datetime.timedelta(days=1)
