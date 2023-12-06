@@ -15,7 +15,7 @@ def get_data(my_date: datetime.date) -> str:
 
 def get_cur_date(my_date: datetime.date) -> str:
     current_date = str(my_date - datetime.timedelta(days=1)).split('-')
-    current_datef = current_date[0]+current_date[1]+current_date[2]
+    current_datef = current_date[0] + current_date[1] + current_date[2]
     return str(current_datef)
 
 
@@ -27,7 +27,7 @@ def get_usd() -> None:
         begining_data = datetime.datetime(int(current_datef[0:4]), 1, 1)
         begining_data = str(begining_data)[:10]
         begining_dataf = begining_data[:4] + \
-            begining_data[5:7]+begining_data[8:10]
+            begining_data[5:7] + begining_data[8:10]
         with open(begining_dataf + "_" + current_datef + '.csv', 'a', newline='', encoding="utf-8") as file:
             url = "https://www.cbr-xml-daily.ru/archive/" + \
                 get_data(my_date) + "/daily_json.js"
