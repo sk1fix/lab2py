@@ -42,7 +42,7 @@ def get_usd() -> None:
             wr = csv.writer(file)
             for valute in valute_data.values():
                 if valute['CharCode'] == 'USD':
-                    wr.writerow((f"Дата: {data['Date']}").split(','))
+                    wr.writerow((f"Дата: {data['Date'][0:10]}").split(','))
                     wr.writerow(
                         (f"{valute['Name']} курс: {valute['Value']}").split(','))
             if str(my_date) == str(begining_data):
