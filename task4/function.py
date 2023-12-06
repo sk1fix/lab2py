@@ -2,6 +2,16 @@ import datetime
 import csv
 
 
+def get_usd(my_date: datetime.date) -> str:
+    f = open('data.csv', 'r')
+    s = csv.reader(f)
+    for row in s:
+        if str(row[0][10:20]) == str(my_date):
+            return (row[1][30:])
+        if str(my_date) > row[0][10:20]:
+            return None
+
+
 def get_usd_XY(my_date: datetime.date) -> str:
     fx = open("X.csv", 'r')
     fy = open("Y.csv", 'r')
