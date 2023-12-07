@@ -29,7 +29,7 @@ def get_usd_XY(my_date: datetime.date) -> str:
     for row in sy:
         county += 1
         if countx == county:
-            return str(row[0][18:24])
+            return str(row[0][30:])
 
 
 def get_data_year() -> str:

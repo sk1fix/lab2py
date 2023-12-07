@@ -6,10 +6,10 @@ class DataIterator:
         self.filename = filename
         self.index = 0
         self.data = []
-        with open(self.filename, 'r') as file:
+        with open(self.filename, 'r',) as file:
             r = csv.reader(file)
             for row in r:
-                self.data.append((row[0][10:20], row[1][30:]))
+                self.data.append((row[0][10:], row[1][30:]))
 
     def __iter__(self):
         return self
@@ -23,6 +23,6 @@ class DataIterator:
         raise StopIteration
 
 
-iterator = DataIterator('20230101_20231205.csv')
+iterator = DataIterator('data.csv')
 for date, data in iterator:
     print(f"Дата: {date}, Данные: {data}")
